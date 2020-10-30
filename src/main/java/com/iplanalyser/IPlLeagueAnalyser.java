@@ -295,4 +295,24 @@ public List<IPLBatting> getPlayerWithMax100AndBestBattingAverage() {
 	return batmenMaxHundredsWithGreatestAvg;
 }
 
+public List<IPLBatting> getPlayerWithZeroCenturyOrHalfCenturyAndBestBattingAverage(){
+	
+	List<IPLBatting> listZero100s=IPLBattingList.stream()
+			.filter(player->player.Hundreds()==0)
+			.collect(Collectors.toList());
+	List<IPLBatting> listZero100s50s=listZero100s.stream()
+			.filter(player->player.Fifties()==0)
+			.collect(Collectors.toList());
+	
+	Double greatestAvg= listZero100s50s.stream()
+			.map(player -> player.Average())
+			.max(Double::compare)
+			.get();
+	
+	List<IPLBatting> batmenWithZero100s50sWithBestAvg = listZero100s50s.stream()
+			.filter(player->player.Average()==greatestAvg)
+			.collect(Collectors.toList());
+	return batmenWithZero100s50sWithBestAvg;		
+}
+
 }
