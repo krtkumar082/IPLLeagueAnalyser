@@ -40,6 +40,13 @@ public class IPLBatting {
 		double average = Double.parseDouble(this.avg);
 		return average;
 	}
+	
+	public double StrikeRate() {
+		if (strikeRate.equals("-") || strikeRate == "")
+			this.strikeRate = "0";
+		double sr = Double.parseDouble(this.strikeRate);
+		return sr;
+	}
 
 	@Override
 	public String toString() {
