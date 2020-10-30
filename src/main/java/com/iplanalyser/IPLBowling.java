@@ -36,7 +36,20 @@ public class IPLBowling {
 		double average = Double.parseDouble(this.avg);
 		return average;
 	}
-
+	public double StrikeRate() {
+		if (strikeRate.equals("-") || strikeRate == "")
+			this.strikeRate = "9999";
+		double sr = Double.parseDouble(this.strikeRate);
+		return sr;
+	}
+	
+	public double Economy() {
+		if (economyRate.equals("-") || economyRate == "")
+			this.strikeRate = "9999";
+		double ec = Double.parseDouble(this.economyRate);
+		return ec;
+	}
+	
 	@Override
 	public String toString() {
 		return "Bowlers-- \nPosition: " + pos + " Player :" + player + " Matches: " + matches + " Innings: " + innings

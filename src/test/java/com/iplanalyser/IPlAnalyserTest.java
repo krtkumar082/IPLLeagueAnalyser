@@ -92,10 +92,18 @@ public class IPlAnalyserTest {
 	
 	@Test
 	public void givenIplBowlingData_SortBowlingDataAccordingToStrikeRate_ReturnSameList() throws Exception{
-		List<IPLBowling> listOfTopBowlingStrikeRate = IPlLeagueAnalyser.getTopBowlingStrikingRates();
-		System.out.println(listOfTopBowlingStrikeRate);
+		List<IPLBowling> listOfTopBowlingStrikeRate =  IPlLeagueAnalyser.getTopBowlingStrikingRates();
+		
 		assertEquals("Alzarri Joseph",listOfTopBowlingStrikeRate.get(0).player);
      	assertEquals("Ish Sodhi",listOfTopBowlingStrikeRate.get(1).player);
 		assertEquals("Khaleel Ahmed",listOfTopBowlingStrikeRate.get(2).player);
 	}
+	
+	@Test
+	public void givenIplBowlingData_SortBowlingDataAccordingToEconomy_ReturnSameList() throws Exception {
+		List<IPLBowling> listOfTopBowlersWithBestEconomy = IPlLeagueAnalyser.getTopBowlerWithBestEconomy();
+System.out.println(listOfTopBowlersWithBestEconomy);
+		assertEquals("Shivam Dube",listOfTopBowlersWithBestEconomy.get(0).player);
+	}
+	
 }
