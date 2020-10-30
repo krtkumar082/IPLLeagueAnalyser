@@ -9,14 +9,24 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.exception.IPlAnalyserException;
+
 public class IPlAnalyserTest {
 	public String FILE_PATH="C:\\Users\\KIRTI KUMAR\\eclipse-workspace - 3\\IPLLeagueAnalyser\\Batting2.csv";
+	public String FILE_PATH_BOWLING_DATA="C:\\Users\\KIRTI KUMAR\\eclipse-workspace - 3\\IPLLeagueAnalyser\\Bowling.csv";
 	public IPlLeagueAnalyser IPlLeagueAnalyser;
 	
 	@Before
 	public void setUp() throws IOException {
 		IPlLeagueAnalyser=new IPlLeagueAnalyser();
-		IPlLeagueAnalyser.loadDataToList(FILE_PATH);
+		try {
+			IPlLeagueAnalyser.loadBattingDataToList(FILE_PATH);
+			IPlLeagueAnalyser.loadBowlingDataToLIst(FILE_PATH_BOWLING_DATA);
+		} catch (IPlAnalyserException e) {
+			
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Test
@@ -71,4 +81,14 @@ public class IPlAnalyserTest {
 		List<IPLBatting> listOfMaxRunAndGreatestAverage = IPlLeagueAnalyser.getCricketerWithMaximumRunWithGreatestAverage();
 		assertEquals("David Warner ", listOfMaxRunAndGreatestAverage.get(0).player);
 	}
+	
+	@Test
+	public void givenIplBowlingData_SortBowlingDataAccordingToAverage_ReturnSameList() {
+		List<IPLBowling> listOfTopBowlingAverage = IPlLeagueAnalyser. getTopBowlingAverages();
+		System.out.println(listOfTopBowlingAverage);
+		assertEquals("Krishnappa Gowtham",listOfTopBowlingAverage.get(0).player);
+		assertEquals("Tim Southee",listOfTopBowlingAverage.get(1).player);
+		assertEquals("Prasidh Krishna",listOfTopBowlingAverage.get(2).player);
+	}
+	
 }
