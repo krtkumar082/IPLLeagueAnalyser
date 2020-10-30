@@ -91,4 +91,25 @@ public static List<IPLBatting> IPLBattingList;
 		return batmenBestStrikingRateWithMax4sAnd6s ;
 	}
 	
+	public List<IPLBatting> getCricketerWithBestStrikingRateWithGreatestAvg()throws IOException{
+		Double greatestAvg = IPLBattingList.stream()
+				.map(player -> (player.Average()))
+				.max(Double::compare)
+				.get();
+		List<IPLBatting> batmenWithgreatestAvg = IPLBattingList.stream()
+				.filter((player -> (player.Average())==greatestAvg))
+				.collect(Collectors.toList());
+		
+		double bestStrikingRate=batmenWithgreatestAvg.stream()
+				.map(player -> player.StrikeRate())
+				.max(Double::compare)
+				.get();
+		
+		List<IPLBatting> batmenBestStrikingRateWithGreatestAvg = batmenWithgreatestAvg.stream()
+				.filter(player->player.StrikeRate()==bestStrikingRate)
+				.collect(Collectors.toList());
+		
+		return batmenBestStrikingRateWithGreatestAvg ;
+	}
+	
 }
