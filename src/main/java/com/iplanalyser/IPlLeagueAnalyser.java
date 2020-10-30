@@ -54,4 +54,20 @@ public static List<IPLBatting> IPLBattingList;
 		Collections.reverse(sortedAvgList);
 		return sortedAvgList;
 	}
+	
+	public List<IPLBatting> getTopBatmenWithMax6s(String csvFile) throws Exception {
+		List<IPLBatting> sortedAvgList = this.IPLBattingList.stream()
+				.sorted((player1, player2) ->Integer.compare(player1.no_of_6s(), player2.no_of_6s()))
+				.collect(Collectors.toList());
+		Collections.reverse(sortedAvgList);
+		return sortedAvgList;
+	}
+	public List<IPLBatting> getTopBatmenWithMax4s(String csvFile) throws Exception {
+		List<IPLBatting> sortedAvgList = this.IPLBattingList.stream()
+				.sorted((player1, player2) -> Integer.compare(player1.no_of_4s(), player2.no_of_4s()))
+				.collect(Collectors.toList());
+		Collections.reverse(sortedAvgList);
+		return sortedAvgList;
+	}
+	
 }
