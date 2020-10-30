@@ -71,6 +71,14 @@ public class IPlLeagueAnalyser {
 		return sortedAvgList;
 	}
 	
+	public List<IPLBowling> getTopBowlerWithBestEconomy() throws Exception {
+		List<IPLBowling> sortedAvgList = this.IplBowlingList.stream()
+				.sorted((player1, player2) -> Double.compare(player1.Economy(), player2.Economy()))
+				.collect(Collectors.toList());
+		
+		return sortedAvgList;
+	}
+	
 	public List<IPLBatting> getTopBattingAverages(String csvFile) throws Exception {
 		List<IPLBatting> sortedAvgList = this.IPLBattingList.stream()
 				.sorted((player1, player2) -> Double.compare(player1.Average(), player2.Average()))
