@@ -47,6 +47,20 @@ public class IPLBatting {
 		double sr = Double.parseDouble(this.strikeRate);
 		return sr;
 	}
+	
+	public int no_of_6s() {
+		if(sixes.equals("-") || sixes == "")
+			this.sixes="0";
+		int six=Integer.parseInt(this.sixes);
+		return six;
+	}
+	
+	public int no_of_4s() {
+		if(fours.equals("-") || fours == "")
+			this.fours="0";
+		int four=Integer.parseInt(this.fours);
+		return four;
+	}
 
 	@Override
 	public String toString() {
