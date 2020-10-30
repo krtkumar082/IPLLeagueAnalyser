@@ -221,7 +221,7 @@ public List<IPLBowling> getBowlersWithBestStrikeRateWithMax4wAnd5w() {
 		List<IPLBatting> batmenMaxRunsWithGreatestAvg = batmenWithMaxRuns.stream()
 				.filter(player->player.Average()==greatestAvg)
 				.collect(Collectors.toList());
-		System.out.println(batmenMaxRunsWithGreatestAvg);
+		
 		return batmenMaxRunsWithGreatestAvg;
 	}
 
@@ -274,5 +274,25 @@ public List<String> getPlayerWithMostRunAndMostWicket(){
 	}
 	return allRounderList;		
  }
+
+public List<IPLBatting> getPlayerWithMax100AndBestBattingAverage() {
+	int maxHuns = IPLBattingList.stream()
+			.map(player -> (player.Hundreds()))
+			.max(Double::compare)
+			.get();
+	List<IPLBatting> batmenWithMaxHundreds = IPLBattingList.stream()
+			.filter((player -> (player.Hundreds())==maxHuns))
+			.collect(Collectors.toList());
+	Double greatestAvg= batmenWithMaxHundreds.stream()
+			.map(player -> player.Average())
+			.max(Double::compare)
+			.get();
+	
+	List<IPLBatting> batmenMaxHundredsWithGreatestAvg = batmenWithMaxHundreds.stream()
+			.filter(player->player.Average()==greatestAvg)
+			.collect(Collectors.toList());
+	
+	return batmenMaxHundredsWithGreatestAvg;
+}
 
 }
