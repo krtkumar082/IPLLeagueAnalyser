@@ -19,20 +19,20 @@ public class IPlLeagueAnalyser {
  public static List<IPLBatting> IPLBattingList;
  public static List<IPLBowling> IplBowlingList;
 	public int loadCSVData(String csvFile) {
-		int numOfEntries=0;
+		int emtries=0;
 		try {
 			
 			Reader reader=Files.newBufferedReader(Paths.get(csvFile));
 			Iterator<IPLBatting> iterator=new OpenCSVBuilder().getCSVFileIterator(reader,IPLBatting.class);
 			Iterable<IPLBatting> csvIterable = () -> iterator;
-			numOfEntries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
+			emtries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
 			
 			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		return numOfEntries;
+		return emtries;
 	}
 	
 	public void loadBattingDataToList(String csvFile) throws IPlAnalyserException {
