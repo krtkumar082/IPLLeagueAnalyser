@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +26,7 @@ public static List<IPLBatting> IPLBattingList;
 			Iterable<IPLBatting> csvIterable = () -> iterator;
 			numOfEntries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
 			
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -34,8 +36,14 @@ public static List<IPLBatting> IPLBattingList;
 	
 	public void loadDataToList(String csvFile) throws IOException {
 		Reader reader=Files.newBufferedReader(Paths.get(csvFile));
-	    IPLBattingList = new CsvToBeanBuilder(reader).withType(IPLBatting.class).build().parse();
+	    IPLBattingList =  new CsvToBeanBuilder(reader).withType(IPLBatting.class).withIgnoreLeadingWhiteSpace(true).build().parse();
 	}
 	
-	
+	public List<IPLBatting> getTopBattingAverages(String csvFile) throws Exception {
+		List<IPLBatting> sortedAvgList = this.IPLBattingList.stream()
+				.sorted((player1, player2) -> Double.compare(player1.Average(), player2.Average()))
+				.collect(Collectors.toList());
+		Collections.reverse(sortedAvgList);
+		return sortedAvgList;
+	}
 }
