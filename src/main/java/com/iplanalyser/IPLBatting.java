@@ -68,6 +68,14 @@ public class IPLBatting {
 		int run = Integer.parseInt(this.runs);
 		return run;
 	}
+	
+	public int Hundreds() {
+		if (hundreds.equals("-") || hundreds == "")
+			this.hundreds = "0";
+		int hun = Integer.parseInt(this.hundreds);
+		return hun;
+	}
+	
 	@Override
 	public String toString() {
 		return "Batsman-- \nPosition: " + pos + " Player :" + player + " Matches: " + matches + " Innings: " + innings
