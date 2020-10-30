@@ -76,6 +76,13 @@ public class IPLBatting {
 		return hun;
 	}
 	
+	public int Fifties() {
+		if (fifties.equals("-") || fifties == "")
+			this.fifties = "0";
+		int fif = Integer.parseInt(this.fifties);
+		return fif;
+	}
+	
 	@Override
 	public String toString() {
 		return "Batsman-- \nPosition: " + pos + " Player :" + player + " Matches: " + matches + " Innings: " + innings
