@@ -64,6 +64,13 @@ public class IPLBowling {
 		return fiveW;
 	}
 	
+	public int Wickets() {
+		if (wickets.equals("-") || wickets == "")
+			this.wickets = "0";
+		int wic = Integer.parseInt(this.wickets);
+		return wic;
+	}
+	
 	@Override
 	public String toString() {
 		return "Bowlers-- \nPosition: " + pos + " Player :" + player + " Matches: " + matches + " Innings: " + innings
