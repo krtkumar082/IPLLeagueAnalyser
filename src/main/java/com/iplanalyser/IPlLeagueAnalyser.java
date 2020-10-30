@@ -85,23 +85,31 @@ public List<IPLBowling> getBowlersWithBestStrikeRateWithMax4wAnd5w() {
 			.map(player -> (player.no_of_4w()+player.no_of_5w()))
 			.max(Integer::compare)
 			.get();
-	List<IPLBowling> batmenWithMax4wAnd5w = IplBowlingList.stream()
+	List<IPLBowling> bowlerWithMax4wAnd5w = IplBowlingList.stream()
 			.filter((player -> (player.no_of_4w()+player.no_of_5w())==max4wAnd5w))
 			.collect(Collectors.toList());
 	
-	double bestStrikingRate=batmenWithMax4wAnd5w.stream()
+	double bestStrikingRate=bowlerWithMax4wAnd5w.stream()
 			.map(player -> player.StrikeRate())
 			.min(Double::compare)
 			.get();
 	
-	List<IPLBowling> batmenBestStrikingRateWithMax4wAnd5w = batmenWithMax4wAnd5w.stream()
+	List<IPLBowling> bowlerBestStrikingRateWithMax4wAnd5w = bowlerWithMax4wAnd5w.stream()
 			.filter(player->player.StrikeRate()==bestStrikingRate)
 			.collect(Collectors.toList());
 	
-	return batmenBestStrikingRateWithMax4wAnd5w ;
+	return bowlerBestStrikingRateWithMax4wAnd5w ;
 		
 	}
-	
+	public List<IPLBowling> getBowlersWithStrikeRateAndBestAverage(){
+		List<IPLBowling> sortedStrikeRateAndAverageList = IplBowlingList.stream()
+				.filter(player->player.Average()!=0 && player.StrikeRate()!=0)
+				.sorted((player1, player2) -> Double.compare(player1.StrikeRate()+player1.Average(), player2.StrikeRate()+player2.Average()))
+				.collect(Collectors.toList());
+		return sortedStrikeRateAndAverageList;
+	}
+
+
 	//Batting side
 	public List<IPLBatting> getTopBattingAverages(String csvFile) throws Exception {
 		List<IPLBatting> sortedAvgList = this.IPLBattingList.stream()
