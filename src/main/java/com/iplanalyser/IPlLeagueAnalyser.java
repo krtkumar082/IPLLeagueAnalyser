@@ -19,20 +19,20 @@ public class IPlLeagueAnalyser {
  public static List<IPLBatting> IPLBattingList;
  public static List<IPLBowling> IplBowlingList;
 	public int loadCSVData(String csvFile) {
-		int emtries=0;
+		int numOfEntries=0;
 		try {
 			
 			Reader reader=Files.newBufferedReader(Paths.get(csvFile));
 			Iterator<IPLBatting> iterator=new OpenCSVBuilder().getCSVFileIterator(reader,IPLBatting.class);
 			Iterable<IPLBatting> csvIterable = () -> iterator;
-			emtries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
+			numOfEntries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
 			
 			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		return emtries;
+		return numOfEntries;
 	}
 	
 	public void loadBattingDataToList(String csvFile) throws IPlAnalyserException {
@@ -55,12 +55,20 @@ public class IPlLeagueAnalyser {
 		}
 	}
 	
-	public List<IPLBowling> getTopBowlingAverages(){
+	public List<IPLBowling> getTopBowlingAverages()throws Exception{
 		List<IPLBowling> sortedAvgBowlingList = IplBowlingList.stream()
 				.sorted((player1, player2) -> Double.compare(player1.Average(), player2.Average()))
 				.collect(Collectors.toList());
 		Collections.reverse(sortedAvgBowlingList);
 		return sortedAvgBowlingList;
+	}
+	
+	public List<IPLBowling> getTopBowlingStrikingRates() throws Exception {
+		List<IPLBowling> sortedAvgList = this.IplBowlingList.stream()
+				.sorted((player1, player2) -> Double.compare(player1.StrikeRate(), player2.StrikeRate()))
+				.collect(Collectors.toList());
+		
+		return sortedAvgList;
 	}
 	
 	public List<IPLBatting> getTopBattingAverages(String csvFile) throws Exception {
@@ -70,6 +78,8 @@ public class IPlLeagueAnalyser {
 		Collections.reverse(sortedAvgList);
 		return sortedAvgList;
 	}
+	
+	
 	
 	public List<IPLBatting> getTopStrikingRates(String csvFile) throws Exception {
 		List<IPLBatting> sortedAvgList = this.IPLBattingList.stream()
