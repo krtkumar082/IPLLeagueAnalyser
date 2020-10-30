@@ -102,8 +102,14 @@ public class IPlAnalyserTest {
 	@Test
 	public void givenIplBowlingData_SortBowlingDataAccordingToEconomy_ReturnSameList() throws Exception {
 		List<IPLBowling> listOfTopBowlersWithBestEconomy = IPlLeagueAnalyser.getTopBowlerWithBestEconomy();
-System.out.println(listOfTopBowlersWithBestEconomy);
 		assertEquals("Shivam Dube",listOfTopBowlersWithBestEconomy.get(0).player);
+	}
+
+	@Test
+	public void givenIplBowlingData_SortBowlingDataAccordingToBestStrikeRateWithMax4wAnd5w_ReturnSameList() {
+		List<IPLBowling> listOfTopBowlersWithBestStrikeRateANdMax4w5w = IPlLeagueAnalyser.getBowlersWithBestStrikeRateWithMax4wAnd5w();
+System.out.println(listOfTopBowlersWithBestStrikeRateANdMax4w5w);
+		assertEquals("Kagiso Rabada",listOfTopBowlersWithBestStrikeRateANdMax4w5w.get(0).player);
 	}
 	
 }

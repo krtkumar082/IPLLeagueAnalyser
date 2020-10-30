@@ -50,6 +50,20 @@ public class IPLBowling {
 		return ec;
 	}
 	
+	public int no_of_4w() {
+		if(fourWickets.equals("-") || fourWickets == "")
+			this.fourWickets="0";
+		int fourW=Integer.parseInt(this.fourWickets);
+		return fourW;
+	}
+	
+	public int no_of_5w() {
+		if(fiveWickets.equals("-") || fiveWickets == "")
+			this.fiveWickets="0";
+		int fiveW=Integer.parseInt(this.fiveWickets);
+		return fiveW;
+	}
+	
 	@Override
 	public String toString() {
 		return "Bowlers-- \nPosition: " + pos + " Player :" + player + " Matches: " + matches + " Innings: " + innings
