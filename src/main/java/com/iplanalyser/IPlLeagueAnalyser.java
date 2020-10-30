@@ -226,6 +226,28 @@ public List<IPLBowling> getBowlersWithBestStrikeRateWithMax4wAnd5w() {
 	}
 
 	
-	
+public List<String> getBestBattingAndBowlingAverage(){
+		
+		List<String> bestBattingAndBowlingAverage=new ArrayList<>();
+		
+		List<IPLBatting> bestBattingAvg = IPLBattingList.stream()
+				.sorted((player1, player2) -> Double.compare(player1.Average(),player2.Average()))
+				.collect(Collectors.toList());
+		Collections.reverse(bestBattingAvg);
+		
+		List<IPLBowling> bestBowlingAvg=IplBowlingList.stream()
+				.filter(player->player.Average()!=0)
+				.sorted((player1, player2) -> Double.compare(player1.Average(), player2.Average()))
+				.collect(Collectors.toList());
+		
+		for (IPLBatting batter : bestBattingAvg) {
+			for (IPLBowling bowler : bestBowlingAvg) {
+				if (batter.player.equals(bowler.player)) {
+					bestBattingAndBowlingAverage.add(batter.player);
+				}
+			}
+		}
+		return bestBattingAndBowlingAverage;		
+	}
 	
 }
