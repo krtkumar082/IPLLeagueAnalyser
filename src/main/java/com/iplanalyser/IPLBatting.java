@@ -4,96 +4,48 @@ import com.opencsv.bean.CsvBindByName;
 
 public class IPLBatting {
 	@CsvBindByName(column = "POS")
-	public int pos;
-	
+	public String pos;
 	@CsvBindByName(column = "PLAYER")
 	public String player;
-	
 	@CsvBindByName(column = "Mat")
-	public int mat;
-	
-	@CsvBindByName(column = "Inns")
-	public int inns;
-	
+	public String matches;
+	@CsvBindByName(column = "inns")
+	public String innings;
 	@CsvBindByName(column = "NO")
-	public int no;
-	
+	public String notOuts;
 	@CsvBindByName(column = "Runs")
-	public int runs;
-	
+	public String runs;
 	@CsvBindByName(column = "HS")
-	public int hs;
-	
+	public String highestScore;
 	@CsvBindByName(column = "Avg")
-	public double avg;
-	
+	public String avg;
 	@CsvBindByName(column = "BF")
-	public int bf;
-	
+	public String ballsFaced;
 	@CsvBindByName(column = "SR")
-	public double sr;
-	
+	public String strikeRate;
 	@CsvBindByName(column = "100")
-	int num100;
-	
+	public String hundreds;
 	@CsvBindByName(column = "50")
-	public int num50;
-	
+	public String fifties;
 	@CsvBindByName(column = "4s")
-	public int num4s;
-	
+	public String fours;
 	@CsvBindByName(column = "6s")
-	public int num6s;
-	
-	public int getPos() {
-		return this.pos;
+	public String sixes;
+
+	public double Average() {
+		if(avg==null)
+			this.avg = "0.0";
+		else if (avg.equals("-"))
+			this.avg = "0.0";
+		double average = Double.parseDouble(this.avg);
+		return average;
 	}
-	public String getPlayer() {
-		return this.player;
-	}
-	public int getMat() {
-		return this.mat;
-	}
-	public int getInns() {
-		return this.inns;
-	}
-	public int getNO() {
-		return this.no;
-	}
-	public int getRuns() {
-		return this.runs;
-	}
-	public int getHS() {
-		return this.hs;
-	}
-	public int getBF() {
-		return this.bf;
-	}
-	public double getSR() {
-		return this.sr;
-	}
-	public int get100() {
-		return this.num100;
-	}
-	public int get50() {
-		return this.num50;
-	}
-	public int get4s() {
-		return this.num4s;
-	}
-	public int get6s() {
-		return this.num6s;
-	}
-	public double getAverage() {
-		return this.avg;
-	}
-	
+
 	@Override
 	public String toString() {
-		return "IplData{" + "Pos='" + pos + ", PLAYER='" + player 
-				+ ", Mat='" + mat+", INNS='"+ inns +",NO='"+ no +", RUNS='"+runs+
-				", HS='"+hs+",Avg='"+avg+",BF='"+bf+",sr='"+sr
-				+",100s='"+num100+",50s='"+num50+",4s='"+num4s+",6s='"+num6s
-				 + '}';
+		return "Batsman-- \nPosition: " + pos + " Player :" + player + " Matches: " + matches + " Innings: " + innings
+				+ " Not Outs: " + notOuts + " Runs: " + runs + " Highest Score: " + highestScore + " Average: " + avg
+				+ " Balls Faced: " + ballsFaced + " Strike Rate: " + strikeRate + " No. of 100s: " + hundreds
+				+ " No. of 50s: " + fifties + " No. of 4s: " + fours + " No. of 6s: " + sixes;
 	}
 }
