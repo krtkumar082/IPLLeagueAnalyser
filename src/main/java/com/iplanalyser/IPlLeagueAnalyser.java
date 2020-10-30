@@ -70,4 +70,25 @@ public static List<IPLBatting> IPLBattingList;
 		return sortedAvgList;
 	}
 	
+	public List<IPLBatting> getCricketerWithBestStrikingRateWith6sAnd4s()throws IOException{
+		int max4sAnd6s = IPLBattingList.stream()
+				.map(player -> (player.no_of_4s()+player.no_of_6s()))
+				.max(Integer::compare)
+				.get();
+		List<IPLBatting> batmenWithMax4sAnd6s = IPLBattingList.stream()
+				.filter((player -> (player.no_of_6s()+player.no_of_4s())==max4sAnd6s))
+				.collect(Collectors.toList());
+		
+		double bestStrikingRate=batmenWithMax4sAnd6s.stream()
+				.map(player -> player.StrikeRate())
+				.max(Double::compare)
+				.get();
+		
+		List<IPLBatting> batmenBestStrikingRateWithMax4sAnd6s = batmenWithMax4sAnd6s.stream()
+				.filter(player->player.StrikeRate()==bestStrikingRate)
+				.collect(Collectors.toList());
+		
+		return batmenBestStrikingRateWithMax4sAnd6s ;
+	}
+	
 }
