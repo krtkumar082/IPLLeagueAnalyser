@@ -250,4 +250,29 @@ public List<String> getBestBattingAndBowlingAverage(){
 		return bestBattingAndBowlingAverage;		
 	}
 	
+public List<String> getPlayerWithMostRunAndMostWicket(){
+	
+	List<String> allRounderList=new ArrayList<>();
+	
+	List<IPLBatting> maxRuns = IPLBattingList.stream()
+			.sorted((player1, player2) -> Double.compare(player1.Runs(),player2.Runs()))
+			.collect(Collectors.toList());
+	Collections.reverse(maxRuns);
+	
+	List<IPLBowling> mostWickets=IplBowlingList.stream()
+			.filter(player->player.Wickets()!=0)
+			.sorted((player1, player2) -> Double.compare(player1.Wickets(), player2.Wickets()))
+			.collect(Collectors.toList());
+	Collections.reverse(mostWickets);
+	
+	for (IPLBatting batter : maxRuns) {
+		for (IPLBowling bowler : mostWickets) {
+			if (batter.player.equals(bowler.player)) {
+				allRounderList.add(batter.player);
+			}
+		}
+	}
+	return allRounderList;		
+ }
+
 }
