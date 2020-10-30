@@ -111,5 +111,26 @@ public static List<IPLBatting> IPLBattingList;
 		
 		return batmenBestStrikingRateWithGreatestAvg ;
 	}
+
+	public List<IPLBatting> getCricketerWithMaximumRunWithGreatestAverage() {
+		int maxRuns = IPLBattingList.stream()
+				.map(player -> (player.Runs()))
+				.max(Double::compare)
+				.get();
+		List<IPLBatting> batmenWithMaxRuns = IPLBattingList.stream()
+				.filter((player -> (player.Runs())==maxRuns))
+				.collect(Collectors.toList());
+		Double greatestAvg= batmenWithMaxRuns.stream()
+				.map(player -> player.Average())
+				.max(Double::compare)
+				.get();
+		
+		List<IPLBatting> batmenMaxRunsWithGreatestAvg = batmenWithMaxRuns.stream()
+				.filter(player->player.Average()==greatestAvg)
+				.collect(Collectors.toList());
+		System.out.println(batmenMaxRunsWithGreatestAvg);
+		return batmenMaxRunsWithGreatestAvg;
+	}
+	
 	
 }
