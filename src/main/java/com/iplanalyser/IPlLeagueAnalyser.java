@@ -109,7 +109,26 @@ public List<IPLBowling> getBowlersWithBestStrikeRateWithMax4wAnd5w() {
 		return sortedStrikeRateAndAverageList;
 	}
 
-
+	public List<IPLBowling> getBowlersWithMaxWicketsAndBestAverage() {
+		int maxWicks = IplBowlingList.stream()
+				.map(player -> (player.Wickets()))
+				.max(Double::compare)
+				.get();
+		List<IPLBowling> bowlerWithMaxwicks = IplBowlingList.stream()
+				.filter((player -> (player.Wickets())==maxWicks))
+				.collect(Collectors.toList());
+		Double greatestAvg= bowlerWithMaxwicks.stream()
+				.map(player -> player.Average())
+				.max(Double::compare)
+				.get();
+		
+		List<IPLBowling> bowlerMaxWicksWithGreatestAvg = bowlerWithMaxwicks.stream()
+				.filter(player->player.Average()==greatestAvg)
+				.collect(Collectors.toList());
+		
+		return bowlerMaxWicksWithGreatestAvg;
+	}
+	
 	//Batting side
 	public List<IPLBatting> getTopBattingAverages(String csvFile) throws Exception {
 		List<IPLBatting> sortedAvgList = this.IPLBattingList.stream()
