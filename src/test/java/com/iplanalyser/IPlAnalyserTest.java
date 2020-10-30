@@ -30,4 +30,13 @@ public class IPlAnalyserTest {
 		assertEquals(83.2, topBattingAverage .get(0).Average(),0.0);
 		
 	}
+	
+	@Test
+	public void givenIplDataCSVFileReturnsTop3StrikeRates() throws Exception {
+
+		List<IPLBatting> topStrikeRate = IPlLeagueAnalyser.getTopStrikingRates(FILE_PATH);
+		assertEquals(333.33, topStrikeRate.get(0).StrikeRate(), 0.0);
+		assertEquals(204.81, topStrikeRate.get(1).StrikeRate(), 0.0);
+		assertEquals(200.00, topStrikeRate.get(2).StrikeRate(), 0.0);
+	}
 }

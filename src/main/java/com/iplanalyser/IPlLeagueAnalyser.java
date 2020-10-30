@@ -46,4 +46,12 @@ public static List<IPLBatting> IPLBattingList;
 		Collections.reverse(sortedAvgList);
 		return sortedAvgList;
 	}
+	
+	public List<IPLBatting> getTopStrikingRates(String csvFile) throws Exception {
+		List<IPLBatting> sortedAvgList = this.IPLBattingList.stream()
+				.sorted((player1, player2) -> Double.compare(player1.StrikeRate(), player2.StrikeRate()))
+				.collect(Collectors.toList());
+		Collections.reverse(sortedAvgList);
+		return sortedAvgList;
+	}
 }
