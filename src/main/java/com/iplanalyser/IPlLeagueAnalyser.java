@@ -79,6 +79,30 @@ public class IPlLeagueAnalyser {
 		return sortedAvgList;
 	}
 	
+public List<IPLBowling> getBowlersWithBestStrikeRateWithMax4wAnd5w() {
+	  
+	int max4wAnd5w = IplBowlingList.stream()
+			.map(player -> (player.no_of_4w()+player.no_of_5w()))
+			.max(Integer::compare)
+			.get();
+	List<IPLBowling> batmenWithMax4wAnd5w = IplBowlingList.stream()
+			.filter((player -> (player.no_of_4w()+player.no_of_5w())==max4wAnd5w))
+			.collect(Collectors.toList());
+	
+	double bestStrikingRate=batmenWithMax4wAnd5w.stream()
+			.map(player -> player.StrikeRate())
+			.min(Double::compare)
+			.get();
+	
+	List<IPLBowling> batmenBestStrikingRateWithMax4wAnd5w = batmenWithMax4wAnd5w.stream()
+			.filter(player->player.StrikeRate()==bestStrikingRate)
+			.collect(Collectors.toList());
+	
+	return batmenBestStrikingRateWithMax4wAnd5w ;
+		
+	}
+	
+	//Batting side
 	public List<IPLBatting> getTopBattingAverages(String csvFile) throws Exception {
 		List<IPLBatting> sortedAvgList = this.IPLBattingList.stream()
 				.sorted((player1, player2) -> Double.compare(player1.Average(), player2.Average()))
@@ -173,6 +197,8 @@ public class IPlLeagueAnalyser {
 		System.out.println(batmenMaxRunsWithGreatestAvg);
 		return batmenMaxRunsWithGreatestAvg;
 	}
+
+	
 	
 	
 }
