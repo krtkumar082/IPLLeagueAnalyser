@@ -61,7 +61,13 @@ public class IPLBatting {
 		int four=Integer.parseInt(this.fours);
 		return four;
 	}
-
+  
+	public int Runs() {
+		if (runs.equals("-") || runs == "")
+			this.runs = "0";
+		int run = Integer.parseInt(this.runs);
+		return run;
+	}
 	@Override
 	public String toString() {
 		return "Batsman-- \nPosition: " + pos + " Player :" + player + " Matches: " + matches + " Innings: " + innings

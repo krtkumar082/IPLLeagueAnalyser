@@ -12,11 +12,12 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import com.csv.OpenCSVBuilder;
+import com.exception.IPlAnalyserException;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 public class IPlLeagueAnalyser {
-public static List<IPLBatting> IPLBattingList;
-	
+ public static List<IPLBatting> IPLBattingList;
+ public static List<IPLBowling> IplBowlingList;
 	public int loadCSVData(String csvFile) {
 		int numOfEntries=0;
 		try {
@@ -34,9 +35,32 @@ public static List<IPLBatting> IPLBattingList;
 		return numOfEntries;
 	}
 	
-	public void loadDataToList(String csvFile) throws IOException {
-		Reader reader=Files.newBufferedReader(Paths.get(csvFile));
-	    IPLBattingList =  new CsvToBeanBuilder(reader).withType(IPLBatting.class).withIgnoreLeadingWhiteSpace(true).build().parse();
+	public void loadBattingDataToList(String csvFile) throws IPlAnalyserException {
+		try {
+			Reader reader=Files.newBufferedReader(Paths.get(csvFile));
+			IPLBattingList = new CsvToBeanBuilder(reader).withType(IPLBatting.class).build().parse();
+		}
+		catch(IOException e) {
+			throw new IPlAnalyserException("File path is incorrect",IPlAnalyserException.ExceptionType.FILE_INCORRECT);
+		}
+	}
+	
+	public void loadBowlingDataToLIst(String csvFile)throws IPlAnalyserException{
+		try {
+			Reader reader=Files.newBufferedReader(Paths.get(csvFile));
+		    IplBowlingList = new CsvToBeanBuilder(reader).withType(IPLBowling.class).build().parse();
+		}
+		catch(IOException e) {
+			throw new IPlAnalyserException("File path is incorrect",IPlAnalyserException.ExceptionType.FILE_INCORRECT);
+		}
+	}
+	
+	public List<IPLBowling> getTopBowlingAverages(){
+		List<IPLBowling> sortedAvgBowlingList = IplBowlingList.stream()
+				.sorted((player1, player2) -> Double.compare(player1.Average(), player2.Average()))
+				.collect(Collectors.toList());
+		Collections.reverse(sortedAvgBowlingList);
+		return sortedAvgBowlingList;
 	}
 	
 	public List<IPLBatting> getTopBattingAverages(String csvFile) throws Exception {
